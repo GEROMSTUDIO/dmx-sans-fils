@@ -21,6 +21,6 @@ Le project est basée sur `Arduino`
 
 == License ==
 
- Copyright (C) 2024 <geromstudio@hotmail.com> (edited by GEROM STUDIO)
+ Ce travail est sous licence CC BY-NC-SA 4.0© 2 par G (C) 2024 <geromstudio@hotmail.com> (edited by GEROM STUDIO)
 
-Ce travail est sous licence CC BY-NC-SA 4.0© 2 par G 
+
