@@ -31,7 +31,7 @@ void loop() {
     delay(20); // Débouncing
     if (etatBouton == LOW) { // Vérifier de nouveau pour éviter les faux déclenchements
       mode++;
-      if (mode > 3) {
+      if (mode > 4) {
         mode = 1;
       }
       setModeConfiguration();
@@ -57,9 +57,13 @@ void setModeConfiguration() {
   } else if (mode == 2) {
     radio.openReadingPipe(1, (uint64_t)0xABCDEF02); // Adresse 2
     strip.setPixelColor(0, strip.Color(0, 255, 0)); // Vert pour le mode 2
-  } else {
+  } else if (mode == 3) {
     radio.openReadingPipe(1, (uint64_t)0xABCDEF03); // Adresse 3
     strip.setPixelColor(0, strip.Color(0, 0, 255)); // Bleu pour le mode 3
+  }
+  } else {
+    radio.openReadingPipe(1, (uint64_t)0xABCDEF04); // Adresse 4
+    strip.setPixelColor(0, strip.Color(255, 0, 255)); // Rose pour le mode 4
   }
   strip.show();
 }
