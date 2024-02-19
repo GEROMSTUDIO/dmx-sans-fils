@@ -10,7 +10,7 @@ On la retrouve sur la plupart des appareils, projecteurs, machine à fumée...
 Tout les appareils reçoivent le signal en même temps.
 
 = Archicteture =
-Le project est basée sur 'Arduino'
+Le project est basée sur 'Arduino`
 
 = Composant =
 
