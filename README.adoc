@@ -12,6 +12,11 @@ Tout les appareils reçoivent le signal en même temps.
 = Architecture =
 Le project est basée sur `Arduino`
 
+= Fonctionnement =
+Le systéme est constitué de deux boitiers, un émetteur et un récepteur.
+L'émetteur lis le signal DMX envoyer par la console, l'envoie au récepteur
+par onde radio (> 2.4ghz). Le récepteur écrit le signal sur le DMX.
+
 = Composant =
 
 * `RF-NANO`
