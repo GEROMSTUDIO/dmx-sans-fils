@@ -1,0 +1,27 @@
+
+                               Pour commander les composants, suivez ces étapes :
+
+   Rendez-vous à l'adresse suivante : https://www.lcsc.com/bom
+
+Importez le fichier BOM_DMX-sans-fils sur le site.
+
+Choisissez les informations correspondant au type de colonne telles que le fabricant, la quantité, le numéro de pièce du fabricant, etc.
+
+Ajoutez les articles dans le panier.
+
+Sélectionnez les quantités souhaitées (veillez à en mettre au moins 2 de chaque) et procédez à la commande.
+
+Notez que certains composants ont une quantité minimale d'achat.
+
+
+   
+            Pour les autres composants, faites attention aux dates de livraison :
+
+https://fr.aliexpress.com/item/1005005571291134.html?spm=a2g0o.order_list.order_list_main.10.4fd85e5bsBIlfh&gatewayAdapt=glo2fra
+(commandez un de chaque)
+
+https://fr.aliexpress.com/item/1005004865943836.html?spm=a2g0o.order_list.order_list_main.4.4fd85e5bsBIlfh&gatewayAdapt=glo2fra 
+(commandez deux unités)
+
+https://fr.aliexpress.com/item/1005005175085484.html?spm=a2g0o.order_list.order_list_main.15.4fd85e5bsBIlfh&gatewayAdapt=glo2fra
+ (commandez deux unités)
