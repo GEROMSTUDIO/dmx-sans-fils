@@ -5,7 +5,7 @@ Le project est de créer des boitiers DMX sans fils
 = Qu'est ce que le DMX ? =
 Le DMX est une norme dans le milieu du spectacle,
 On la retrouve sur la plupart des appareils, projecteurs, machine à fumée...
-Elle permet de contrôler c'est appareil en utilisant qu'un câble.
+ Elle permet de contrôler c'est appareil en utilisant qu'un câble.
 Tout les appareils reçoivent le signal en même temps.
 
 = Archicterue =
