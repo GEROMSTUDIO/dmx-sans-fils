@@ -61,7 +61,6 @@ void setModeConfiguration() {
  } else if (mode == 3) {
     radio.openWritingPipe((uint64_t)0xABCDEF03); // Adresse 3
     strip.setPixelColor(0, strip.Color(0, 0, 255)); // Bleu pour le mode 3
-  }
   } else if {
     radio.openWritingPipe((uint64_t)0xABCDEF04); // Adresse 4
     strip.setPixelColor(0, strip.Color(255, 0, 255)); // Rose pour le mode 4
