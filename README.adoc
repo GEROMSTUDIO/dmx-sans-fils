@@ -14,13 +14,16 @@ Le project est basée sur `Arduino`
 
 = Composant =
 
-* `init(channels)` Starts the DMX library with Serial1. If no channels are given, defaults to 32.
-* `write(channel, value)` Writes a value to DMX buffer.
-* `update()` Calls for the DMX buffer to be sent. Currently, it has to be called inside the main loop.
-* `end()` Ends ESPDMX controller.
+* RF-NANO
+* MAX485
+* WS2812D
+* Bouton poussoir
+* Condensateur électrolytique 16v 100µF
+* Interupteur à glisiére
+* Connecteur DMX (XLR)
 
 == License ==
 
- Ce travail est sous licence CC BY-NC-SA 4.0© 2 par G (C) 2024 <geromstudio@hotmail.com> (edited by GEROM STUDIO)
+ Ce travail est sous licence CC BY-NC-SA 4.0© 2024 <geromstudio@hotmail.com> (edited by GEROM STUDIO)
 
 
