@@ -9,7 +9,7 @@ On la retrouve sur la plupart des appareils, projecteurs, machine à fumée...
  Elle permet de contrôler c'est appareil en utilisant qu'un câble.
 Tout les appareils reçoivent le signal en même temps.
 
-= Archicterue =
+= Archicteture =
 Le project est basée sur 'Arduino'
 
 = Composant =
