@@ -14,13 +14,13 @@ Le project est basée sur `Arduino`
 
 = Composant =
 
-* RF-NANO
-* MAX485
-* WS2812D
-* Bouton poussoir
-* Condensateur électrolytique 16v 100µF
-* Interupteur à glisiére
-* Connecteur DMX (XLR)
+* `RF-NANO'
+* `MAX485'
+* `WS2812D'
+* `Bouton poussoir'
+* `Condensateur électrolytique 16v 100µF'
+* `Interupteur à glisiére'
+* `Connecteur DMX (XLR)'
 
 == License ==
 
