@@ -31,7 +31,7 @@ void loop() {
     delay(20); // Débouncing
     if (etatBouton == LOW) { // Vérifier de nouveau pour éviter les faux déclenchements
       mode++;
-      if (mode > 4) {
+      if (mode > 8) {
         mode = 1;
       }
       setModeConfiguration();
@@ -58,12 +58,24 @@ void setModeConfiguration() {
   } else if (mode == 2) {
     radio.openWritingPipe((uint64_t)0xABCDEF02); // Adresse 2
     strip.setPixelColor(0, strip.Color(0, 255, 0)); // Vert pour le mode 2
- } else if (mode == 3) {
+  } else if (mode == 3) {
     radio.openWritingPipe((uint64_t)0xABCDEF03); // Adresse 3
     strip.setPixelColor(0, strip.Color(0, 0, 255)); // Bleu pour le mode 3
-  } else if {
+  } else if (mode == 4) {
     radio.openWritingPipe((uint64_t)0xABCDEF04); // Adresse 4
-    strip.setPixelColor(0, strip.Color(255, 0, 255)); // Rose pour le mode 4
+    strip.setPixelColor(0, strip.Color(255, 255, 0)); // Jaune pour le mode 4
+  } else if (mode == 5) {
+    radio.openWritingPipe((uint64_t)0xABCDEF05); // Adresse 5
+    strip.setPixelColor(0, strip.Color(255, 0, 255)); // Magenta pour le mode 5
+  } else if (mode == 6) {
+    radio.openWritingPipe((uint64_t)0xABCDEF06); // Adresse 6
+    strip.setPixelColor(0, strip.Color(0, 255, 255)); // Cyan pour le mode 6
+  } else if (mode == 7) {
+    radio.openWritingPipe((uint64_t)0xABCDEF07); // Adresse 7
+    strip.setPixelColor(0, strip.Color(255, 255, 255)); // Blanc pour le mode 7
+  } else if (mode == 8) {
+    radio.openWritingPipe((uint64_t)0xABCDEF08); // Adresse 8
+    strip.setPixelColor(0, strip.Color(255, 165, 0)); // Orange pour le mode 8
   }
   strip.show();
 }
