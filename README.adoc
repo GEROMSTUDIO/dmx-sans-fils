@@ -1,7 +1,7 @@
 = DMX sans fils =
 
-= Présentation du project =
-Le project est de créer des boitiers DMX sans fils
+= Présentation du projet =
+Le projet est de créer des boitiers DMX sans fils
 
 = Qu'est ce que le DMX =
 Le DMX est une norme dans le milieu du spectacle,
@@ -10,7 +10,7 @@ on la retrouve sur la plupart des appareils, projecteurs, machine à fumée...
 Tout les appareils reçoivent le signal en même temps.
 
 = Architecture =
-Le project est basée sur `Arduino`
+Le projet est basée sur `Arduino`
 
 = Fonctionnement =
 Le systéme est constitué de deux boitiers, un émetteur et un récepteur.
