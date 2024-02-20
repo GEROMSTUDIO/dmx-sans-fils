@@ -2,7 +2,7 @@
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
-#include <DMXSimple.h>
+#include <DmxSimple.h>
 #include <Adafruit_NeoPixel.h>
 
 RF24 radio(10, 9); // Broches CE, CSN
@@ -17,7 +17,7 @@ void setup() {
   strip.begin();
   loadModeFromEEPROM(); // Charger le mode depuis l'EEPROM
   setModeConfiguration();
-  DMXSimple.usePin(3); // Utiliser la broche 3 pour la communication DMX
+  DmxSimple.usePin(3); // Utiliser la broche 3 pour la communication DMX
 }
 
 void loop() {
@@ -44,7 +44,7 @@ void loop() {
     radio.read(&buffer, sizeof(buffer));
 
     for (int i = 1; i <= 512; i++) {
-      DMXSimple.write(i, buffer[(i - 1) % 32]);
+      DmxSimple.write(i, buffer[(i - 1) % 32]);
     }
   }
 }
