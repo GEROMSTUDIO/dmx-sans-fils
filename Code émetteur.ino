@@ -5,7 +5,7 @@
 #include <DMXSerial.h>
 #include <Adafruit_NeoPixel.h>
 
-RF24 radio(9, 10); // Broches CE, CSN
+RF24 radio(10, 9); // Broches CE, CSN
 const int boutonPin = A1;
 const int ledPin = 6;
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(1, ledPin, NEO_GRB + NEO_KHZ800);
