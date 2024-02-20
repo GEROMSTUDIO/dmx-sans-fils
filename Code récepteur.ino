@@ -28,7 +28,7 @@ void loop() {
 
   // Incrémenter le mode si le bouton est enfoncé
   if (etatBouton == LOW) {
-    delay(20); // Débouncing
+    delay(50); // Débouncing
     if (etatBouton == LOW) { // Vérifier de nouveau pour éviter les faux déclenchements
       mode++;
       if (mode > 8) {
