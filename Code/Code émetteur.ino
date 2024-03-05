@@ -12,9 +12,6 @@ CRGB leds[NUM_LEDS]; // Déclaration d'un tableau de LED
 #define pinCE   10
 #define pinCSN  9
 
-#define pinCE   10
-#define pinCSN  9
-
 RF24 radio(pinCE, pinCSN);
 const byte adresse[6] = "00001";
 byte valeursEnvoyees1[32]; // Canaux 1-31
@@ -27,11 +24,13 @@ const int boutonPin = A1;
 int mode = 1;
 
 void setup() {
+  Serial.begin(9600);
   DMXSerial.init(DMXReceiver);
   pinMode(boutonPin, INPUT_PULLUP);
   FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);
   radio.begin();
   radio.openWritingPipe(adresse);
+  loadModeFromEEPROM(); // Charger le mode au démarrage
 }
 
 void loop() {
@@ -88,7 +87,7 @@ void loop() {
   radio.write(&valeursEnvoyees6, sizeof(valeursEnvoyees6));
 }
 
-    void setModeConfiguration() {
+void setModeConfiguration() {
   // Utiliser différentes adresses en fonction du mode
   if (mode == 1) {
     radio.openReadingPipe(1, (uint64_t)0xABCDEF01); // Adresse 1
@@ -118,9 +117,10 @@ void loop() {
   FastLED.show();
 }
 
-  void saveModeToEEPROM() {
+void saveModeToEEPROM() {
   EEPROM.write(0, mode); // Enregistrer le mode dans l'EEPROM à l'adresse 0
 }
+
 void loadModeFromEEPROM() {
   mode = EEPROM.read(0); // Charger le mode depuis l'EEPROM à l'adresse 0
 }
