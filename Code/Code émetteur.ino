@@ -5,7 +5,7 @@
 #include <FastLED.h>
 
 #define NUM_LEDS 1 // Nombre de LEDs dans la bande
-#define DATA_PIN 6  // Broche de données à laquelle la led est connectée
+#define DATA_PIN 6  // Broche de données à laquelle la LED est connectée
 
 CRGB leds[NUM_LEDS]; // Déclaration d'un tableau de LED
 
@@ -22,15 +22,17 @@ byte valeursEnvoyees5[32]; // Canaux 125-155
 byte valeursEnvoyees6[32]; // Canaux 156-186
 const int boutonPin = A1;
 int mode = 1;
+uint8_t channelMap[8] = {1, 4, 7, 10, 13, 16, 19, 22}; // Écart de 3 entre chaque canal
 
 void setup() {
-  Serial.begin(9600);
   DMXSerial.init(DMXReceiver);
   pinMode(boutonPin, INPUT_PULLUP);
   FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);
   radio.begin();
-  radio.openWritingPipe(adresse);
-  loadModeFromEEPROM(); // Charger le mode au démarrage
+  radio.openWritingPipe(adresse); // Ouvrir un canal d'écriture
+  loadModeFromEEPROM(); // Ajout pour charger le mode depuis l'EEPROM au démarrage
+  setModeConfiguration();
+  radio.setChannel(channelMap[mode - 1]); // Définir le canal initial
 }
 
 void loop() {
@@ -40,7 +42,7 @@ void loop() {
 
   // Incrémenter le mode si le bouton est enfoncé
   if (etatBouton == LOW) {
-    delay(20); // Débouncing
+    delay(150); // Débouncing
     if (etatBouton == LOW) { // Vérifier de nouveau pour éviter les faux déclenchements
       mode++;
       if (mode > 8) {
@@ -48,6 +50,7 @@ void loop() {
       }
       setModeConfiguration();
       saveModeToEEPROM(); // Sauvegarder le mode dans l'EEPROM
+      radio.setChannel(channelMap[mode - 1]); // Changer le canal RF en fonction du mode
     }
   }
   
@@ -75,44 +78,36 @@ void loop() {
   }
 
   radio.write(&valeursEnvoyees1, sizeof(valeursEnvoyees1));
-  delay(10); // Un petit délai pour éviter l'interférence
+  delay(1); // Un petit délai pour éviter l'interférence
   radio.write(&valeursEnvoyees2, sizeof(valeursEnvoyees2));
-  delay(10);
+  delay(1);
   radio.write(&valeursEnvoyees3, sizeof(valeursEnvoyees3));
-  delay(10);
+  delay(1);
   radio.write(&valeursEnvoyees4, sizeof(valeursEnvoyees4));
-  delay(10);
+  delay(1);
   radio.write(&valeursEnvoyees5, sizeof(valeursEnvoyees5));
-  delay(10);
+  delay(1);
   radio.write(&valeursEnvoyees6, sizeof(valeursEnvoyees6));
 }
 
 void setModeConfiguration() {
-  // Utiliser différentes adresses en fonction du mode
+  // Configuration du mode et de la couleur des LEDs selon le mode
   if (mode == 1) {
-    radio.openReadingPipe(1, (uint64_t)0xABCDEF01); // Adresse 1
-    leds[0] = CRGB(255, 0, 0); // Rouge pour le mode 1
+    leds[0] = CRGB::Red;
   } else if (mode == 2) {
-    radio.openReadingPipe(1, (uint64_t)0xABCDEF02); // Adresse 2
-    leds[0] = CRGB(0, 255, 0); // Vert pour le mode 2
+    leds[0] = CRGB::Green;
   } else if (mode == 3) {
-    radio.openReadingPipe(1, (uint64_t)0xABCDEF03); // Adresse 3
-    leds[0] = CRGB(0, 0, 255); // Bleu pour le mode 3
+    leds[0] = CRGB::Blue;
   } else if (mode == 4) {
-    radio.openReadingPipe(1, (uint64_t)0xABCDEF04); // Adresse 4
-    leds[0] = CRGB(255, 255, 0); // Jaune pour le mode 4
+    leds[0] = CRGB::Yellow;
   } else if (mode == 5) {
-    radio.openReadingPipe(1, (uint64_t)0xABCDEF05); // Adresse 5
-    leds[0] = CRGB(255, 0, 255); // Magenta pour le mode 5
+    leds[0] = CRGB::Purple;
   } else if (mode == 6) {
-    radio.openReadingPipe(1, (uint64_t)0xABCDEF06); // Adresse 6
-    leds[0] = CRGB(0, 255, 255); // Cyan pour le mode 6
+    leds[0] = CRGB::Cyan;
   } else if (mode == 7) {
-    radio.openReadingPipe(1, (uint64_t)0xABCDEF07); // Adresse 7
-    leds[0] = CRGB(255, 255, 255); // Blanc pour le mode 7
+    leds[0] = CRGB::White;
   } else if (mode == 8) {
-    radio.openReadingPipe(1, (uint64_t)0xABCDEF08); // Adresse 8
-    leds[0] = CRGB(255, 165, 0); // Orange pour le mode 8
+    leds[0] = CRGB::OrangeRed; // Utiliser une nuance plus rouge pour le mode 8
   }
   FastLED.show();
 }
