@@ -17,6 +17,7 @@ const byte adresse[6] = "00001";
 byte valeursRecues[32]; // Pour recevoir les données
 const int boutonPin = A1;
 int mode = 1;
+uint8_t channelMap[8] = {1, 4, 7, 10, 13, 16, 19, 22}; // Écart de 3 entre chaque canal
 
 void setup() {
   Serial.begin(9600);
@@ -25,9 +26,11 @@ void setup() {
   pinMode(boutonPin, INPUT_PULLUP);
   FastLED.addLeds<WS2812B, DATA_PIN, RGB>(leds, NUM_LEDS);
   radio.begin();
-  radio.openReadingPipe(0, adresse);
-  radio.startListening();
+  radio.openReadingPipe(1, adresse);
   loadModeFromEEPROM(); // Ajout pour charger le mode depuis l'EEPROM au démarrage
+  setModeConfiguration();
+  radio.setChannel(channelMap[mode - 1]); // Changer le canal RF en fonction du mode
+  radio.startListening();
 }
 
 void loop() {
@@ -36,12 +39,13 @@ void loop() {
 
   // Incrémenter le mode si le bouton est enfoncé
   if (etatBouton == LOW) {
-    delay(20); // Debouncing
+    delay(150); // Debouncing
     if (digitalRead(boutonPin) == LOW) { // Vérification après debounce
       mode++;
       if (mode > 8) mode = 1;
-      setModeConfiguration();
       saveModeToEEPROM();
+      setModeConfiguration();
+      radio.setChannel(channelMap[mode - 1]); // Changer le canal RF en fonction du mode
     }
   }
 
@@ -61,20 +65,26 @@ void loop() {
 
 void setModeConfiguration() {
   // Configuration du mode et de la couleur des LEDs selon le mode
-  switch (mode) {
-    case 1: leds[0] = CRGB::Red; break;
-    case 2: leds[0] = CRGB::Green; break;
-    case 3: leds[0] = CRGB::Blue; break;
-    case 4: leds[0] = CRGB::Yellow; break;
-    case 5: leds[0] = CRGB::Magenta; break;
-    case 6: leds[0] = CRGB::Cyan; break;
-    case 7: leds[0] = CRGB::White; break;
-    case 8: leds[0] = CRGB(255, 165, 0); break; // Orange
-    default: leds[0] = CRGB::Black; // Éteindre si mode inconnu
+  if (mode == 1) {
+    leds[0] = CRGB::Red;
+  } else if (mode == 2) {
+    leds[0] = CRGB::Green;
+  } else if (mode == 3) {
+    leds[0] = CRGB::Blue;
+  } else if (mode == 4) {
+    leds[0] = CRGB::Yellow;
+  } else if (mode == 5) {
+    leds[0] = CRGB::Purple;
+  } else if (mode == 6) {
+    leds[0] = CRGB::Cyan;
+  } else if (mode == 7) {
+    leds[0] = CRGB::White;
+  } else if (mode == 8) {
+    leds[0] = CRGB::OrangeRed; // Utiliser une nuance plus rouge pour le mode 8
   }
   FastLED.show();
-  // Note: Pas de modification nécessaire pour l'adresse NRF24L01 dans cet extrait
-}
+} 
+
 
 void saveModeToEEPROM() {
   EEPROM.write(0, mode);
@@ -82,5 +92,4 @@ void saveModeToEEPROM() {
 
 void loadModeFromEEPROM() {
   mode = EEPROM.read(0);
-  if (mode < 1 || mode > 8) mode = 1; // Assurer que le mode est dans une plage valide
 }
